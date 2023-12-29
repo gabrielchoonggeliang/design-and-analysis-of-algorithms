@@ -91,37 +91,29 @@ void storeCustomerDetails(const Customer& newcustomer);
 void displayCustomerDetails(const Customer& customer);
 void loadCustomerDataFromFile(vector<Customer>& customersRecord);
 void writeCustomerDetailsToFile(const string& fileName);
-// void displayAllCustomerDetails(const Customer& customer);
 void displayAllCustomersFromVector(const vector<Customer>& customers);
 void readInputFile(const string& fileName);
 void randomlyAssignRoomAttributes();
 void showRoom();
 void writeRoomInformationToFile(const string& fileName);
 bool compareRooms(const Room& room1, const Room& room2);
-// int sortandsearchRooms(vector<Room>& rooms);
 void printAllRooms(const vector<Room>& rooms);
 void printRoom(const Room& room);
 void readRoomInformationFromFile(const string& fileName, vector<Room>& hotelRooms);
 int binarySearchAvailableRooms(const vector<Room>& rooms, const string& targetStatus);
-// void searchAvailableRooms(vector<Room>& hotelRooms, const string& targetStatus);
-// void deleteRooms(vector<Room>& hotelRooms);
-// bool shouldRemoveRoom(const Room& room);
+void searchAvailableRooms(vector<Room>& hotelRooms, const string& targetStatus);
 Room parseRoom(const string& roomData);
 vector<Room> readRoomData(const string& filename);
-// void writeRoomInformationToVector(vector<string>& roomInfoVector);
 void writeRoomInformationToFile(const string& fileName);
 string roomStatusToString(RoomStatus status);
 string cleanlinessToString(Cleanliness cleanliness);
 string bedTypeToString(BedType bedType);
 void printRoomInformationVector(const vector<string>& roomInfoVector);
-// int binarySearchForVacantRoom(const vector<Room>& rooms);
 bool isRoomVacant(const Room& room);
 void sortRoomInfoVectorBasedOnPrice(vector<string>& roomInfoVector);
 int binarySearchAvailableRooms(const vector<string>& roomInfoVector, int targetRoomNumber);
 void readRoomInformationFromFile(const string& fileName, vector<string>& roomInfoVector);
 void readRoomInformationFromFiles(const string& fileName, vector<string>& roomInfoVector, int linesPerRoom);
-// void vectorToArray(const vector<string>& roomInfoVector, string roomInfoArray[][2]);
-// void printRoomInfoArray(const string roomInfoArray[][2], int size);
 void merge(vector<Room>& rooms, int left, int mid, int right);
 void mergeSort(vector<Room>& rooms, int left, int right);
 void bubbleSort(vector<Room>& rooms);
@@ -138,7 +130,6 @@ void showMinMaxPrice(vector<Room>& rooms, int low, int high);
 void deleteCustomer(vector<Customer>& customers, int customerID, int low, int high);
 void checkoutForm(vector<Customer>& customers, int customerID, int low, int high);
 void showInvoice(vector<Customer>& customers, int customerID);
-// void searchAvailableRooms();
 void showSingleBedroomsByPrice();
 void showDoublebedroomsByPrice();
 void displayRoomInformation(const vector<Room>& rooms);
@@ -194,7 +185,7 @@ void receptionControlPanel() {
 
 
 
-    vector<Customer> customersinfo = {customer1, customer2, customer3};
+    vector<Customer> customersinfo = {customer1, customer2, customer3, customer4, customer5, customer6, customer7, customer8, customer9, customer10};
 
     cout << "***************************************************" << endl;
     cout << "      Welcome to the Reception Control Panel\n";
@@ -216,9 +207,9 @@ void receptionControlPanel() {
     cout << "12. Delete customer\n";
     cout << "13. Check out\n";
     cout << "14. Show invoice\n";
-    cout << "15. Show all rooms (sorted)\n";
-    cout << "16. Show all customers (sorted)\n";
-    cout << "17. Quit\n";
+    cout << "15. Show all rooms (unsorted)\n";
+    cout << "16. Show all customers (unsorted)\n";
+    cout << "17. Exit\n";
     cout << "Enter your choice: ";
     cin >> choice;
 
@@ -774,7 +765,7 @@ Room parseRoom(const string& roomData) {
     istringstream iss(roomData);
     Room room;
 
-    // Assuming the input format is consistent
+    
     iss >> room.roomNumber;
     string statusStr, cleanlinessStr, bedTypeStr;
 
@@ -867,7 +858,7 @@ void sortRoomInfoVectorBasedOnPrice(vector<string>& roomInfoVector) {
         getline(iss1, price1);
         getline(iss2, price2);
 
-        // Skip "Price: $" and "\n"
+        
         price1 = price1.substr(8, price1.size() - 9);
         price2 = price2.substr(8, price2.size() - 9);
 
@@ -961,7 +952,7 @@ int binarySearchAvailableRooms(const vector<string>& roomInfoVector, int targetR
         string roomNumber;
         getline(iss, roomNumber);
 
-        // Skip "Room " and ":\n"
+        
         roomNumber = roomNumber.substr(5, roomNumber.size() - 7);
 
         if (stoi(roomNumber) == targetRoomNumber) {
@@ -1202,8 +1193,7 @@ void updateCustomerInformation(vector<Customer>& customers, int customerID, int 
             cin >> customers[mid].idNumber;
 
             cout << "Name: ";
-            //cin.ignore(); // Clear the newline character from the buffer
-            //getline(cin, name);
+            
             cin >> customers[mid].name;
 
             cout << "Gender: ";
@@ -1216,7 +1206,7 @@ void updateCustomerInformation(vector<Customer>& customers, int customerID, int 
             cin >> customers[mid].roomNumber;
 
             cout << "Check-in Date and Time: ";
-            //cin.ignore(); // Clear the newline character from the buffer
+            
             auto currentTime = chrono::system_clock::to_time_t(chrono::system_clock::now());
             string checkinDateandTime = ctime(&currentTime);
             cout << checkinDateandTime;
@@ -1314,8 +1304,7 @@ void deleteCustomer(vector<Customer>& customers, int customerID, int low, int hi
 
 
 void checkoutForm(vector<Customer>& customers, int customerID, int low, int high) {
-    // cout << "Enter Customer ID: ";
-    // cin >> customerID;
+    
 
     if (low <= high) {
         int mid = low + (high - low) / 2;
